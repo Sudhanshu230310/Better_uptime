@@ -23,11 +23,16 @@ function SignUp() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    let responce= await axios.post(`${Backend_Url}/user/signup`,{
+    try{
+      let responce= await axios.post(`${Backend_Url}/user/signup`,{
         username: formData.username,
         password: formData.password
-    })
-    router.push('/signin')
+      })
+      console.log(responce);
+      router.push('/signin')
+    }catch(e){
+      console.log("bad crediantials")
+    }
   };
 
   return (

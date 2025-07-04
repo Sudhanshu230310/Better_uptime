@@ -15,7 +15,7 @@ import {
   ChevronRight,
   ArrowRight
 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -121,24 +121,25 @@ function App() {
     }
   ];
 
-  return (
+  return (<>
+    {localStorage.getItem("token") && router.push("/dashboard")}
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Navigation */}
       <nav className="bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <Activity className="h-8 w-8 text-blue-400" />
+              <Activity className="h-8 w-8 text-blue-600" />
               <span className="ml-2 text-xl font-bold text-white">UpMonitor</span>
             </div>
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <a href="#features" className="text-gray-300 hover:text-blue-400 transition-colors">Features</a>
-              <button onClick={()=>{router.push('/signup')}} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/25">
+              <button onClick={()=>{router.push('/signup')}} className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/25">
                 Start Free Trial
               </button>
-              <button onClick={()=>{router.push('/signin')}} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/25">
+              <button onClick={()=>{router.push('/signin')}} className="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/25">
                 SignIn
               </button>
             </div>
@@ -336,7 +337,7 @@ function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700">
+      <section className="py-20 bg-gradient-to-r from-blue-800 to-blue-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
             Ready to Never Miss Another Downtime?
@@ -412,7 +413,7 @@ function App() {
         </div>
       </footer>
     </div>
-  );
+  </>);
 }
 
 export default App;

@@ -8,12 +8,13 @@ async function main() {
             id: true
         }
     })
-  
+    console.log(websites.length);
     await xAddBulk(websites.map(w => ({
         url: w.url,
         id: w.id
     })));
 }
+
 
 setInterval(() => {
     main()

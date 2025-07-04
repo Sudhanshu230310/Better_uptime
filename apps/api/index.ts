@@ -58,7 +58,9 @@ app.get("/status/:websiteId", authMiddleware, async (req, res) => {
 })
 
 app.post("/user/signup", async (req, res) => {
+    console.log(req.body);
     const data = AuthInput.safeParse(req.body);
+    console.log(data);
     if (!data.success) {
         console.log(data.error.toString());
         res.status(403).send("");
@@ -71,7 +73,7 @@ app.post("/user/signup", async (req, res) => {
                 username: data.data.username,
                 password: data.data.password
             }
-    })
+        })
         res.json({
             id: user.id
         })
@@ -113,6 +115,14 @@ app.get("/websites",authMiddleware,async (req,res)=>{
     const websites=await prismaClient.website.findMany({
         where:{
             user_id : req.userId
+        },
+        include: {
+            ticks: {
+                orderBy: [{
+                    createdAt: 'desc',
+                }],
+                take: 1
+            }
         }
     })
 

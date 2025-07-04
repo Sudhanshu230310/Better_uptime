@@ -40,10 +40,10 @@ model website_tick {
   id                      String  @id     @default(uuid())
   response_time_ms        Int
   status                  website_status
-  region                  region     @relation(fields: [region_id], references: [id])
-  website                 website     @relation(fields: [website_id], references: [id])     
   region_id               String
   website_id              String
+  region                  region     @relation(fields: [region_id], references: [id])
+  website                 website     @relation(fields: [website_id], references: [id])     
   createdAt               DateTime    @default(now())
 }
 
