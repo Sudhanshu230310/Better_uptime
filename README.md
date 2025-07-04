@@ -1,1 +1,3 @@
 # Betteruptime 
+
+![Betteruptime](./Landing.png)
