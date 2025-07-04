@@ -5,9 +5,9 @@ const app = express();
 import { prismaClient } from "store/client";
 import { AuthInput } from "./types";
 import { authMiddleware } from "./middleware";
-
+import cors from "cors";
 app.use(express.json());
-
+app.use(cors());
 app.post("/website", authMiddleware, async (req, res) => {
     if (!req.body.url) {
         res.status(411).json({});
@@ -37,7 +37,7 @@ app.get("/status/:websiteId", authMiddleware, async (req, res) => {
                 orderBy: [{
                     createdAt: 'desc',
                 }],
-                take: 1
+                take: 10
             }
         }
     })
@@ -106,6 +106,18 @@ app.post("/user/signin", async (req, res) => {
 
     res.json({
         jwt: token
+    })
+})
+
+app.get("/websites",authMiddleware,async (req,res)=>{
+    const websites=await prismaClient.website.findMany({
+        where:{
+            user_id : req.userId
+        }
+    })
+
+    res.json({
+        websites
     })
 })
 
