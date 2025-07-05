@@ -1,8 +1,23 @@
-import { createClient } from "redis";
+import { createClient } from 'redis';
+require ("dotenv").config();
+const client = createClient({
+    username: 'default',
+    password: process.env.redis_pass,
+    socket: {
+        host: 'redis-14182.c278.us-east-1-4.ec2.redns.redis-cloud.com',
+        port: 14182
+    }
+});
 
-const client = await createClient()
-  .on("error", (err) => console.log("Redis Client Error", err))
-  .connect();
+client.on('error', err => console.log('Redis Client Error', err));
+
+await client.connect();
+
+await client.set('foo', 'bar');
+const result = await client.get('foo');
+console.log(result)  // >>> bar
+
+
 
 type WebsiteEvent = {url: string, id: string}
 type MessageType = {

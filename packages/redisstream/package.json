@@ -12,6 +12,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "dotenv": "^17.0.1",
     "redis": "^5.5.6"
   }
 }

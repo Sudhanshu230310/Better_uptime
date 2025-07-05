@@ -114,9 +114,10 @@ function Dashboard() {
       })))
   }
   useEffect(()=>{
+    getData();
     setInterval(async()=>{
         getData();
-    },300)
+    },3*60*1000)
   },[]);
 
   const upWebsites = websites.filter(w => w.status === 'Up').length;
